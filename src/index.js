@@ -3,19 +3,34 @@ import _ from 'lodash';
 import path from 'path';
 
 
-const genDiff = (path1, path2) => {
-  const absolutePath1 = path.resolve(process.cwd(), path1);
-  const absolutePath2 = path.resolve(process.cwd(), path2);
+const genDiff = (pathToBefore, pathToAfter) => {
+  const absolutePathToBefore = path.resolve(process.cwd(), pathToBefore);
+  const absolutePathToAfter = path.resolve(process.cwd(), pathToAfter);
 
-  const content1 = fs.readFileSync(absolutePath1, 'utf-8');
-  const content2 = fs.readFileSync(absolutePath2, 'utf-8');
+  const contentBefore = fs.readFileSync(absolutePathToBefore, 'utf-8');
+  const contentAfter = fs.readFileSync(absolutePathToAfter, 'utf-8');
 
-  const object1 = JSON.parse(content1);
-  const object2 = JSON.parse(content2);
+  const objectBefore = JSON.parse(contentBefore);
+  const objectAfter = JSON.parse(contentAfter);
+  const mergedObject = { ...objectBefore, ...objectAfter };
 
-  console.log(object1, '\n', object2);
-  // const result = object1.keys().reduce((acc, key) => {}, []);
-
+  const result = Object.keys(mergedObject).reduce((acc, key) => {
+    const beforeValue = objectBefore[key];
+    const afterValue = objectAfter[key];
+    if (_.has(objectBefore, key) && _.has(objectAfter, key)) {
+      if (beforeValue === afterValue) {
+        acc.push(`${key}: ${beforeValue}`);
+      } else {
+        acc.push(`- ${key}: ${beforeValue}`, `+ ${key}: ${afterValue}`);
+      }
+    } else if (!_.has(objectAfter, key)) {
+      acc.push(`- ${key}: ${beforeValue}`);
+    } else if (!_.has(objectBefore, key)) {
+      acc.push(`+ ${key}: ${afterValue}`);
+    }
+    return acc;
+  }, []);
+  return `{\n${result.join('\n')}\n}`;
 };
 
 export default genDiff;
