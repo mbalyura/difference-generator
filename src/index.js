@@ -1,17 +1,20 @@
 import fs from 'fs';
 import _ from 'lodash';
 import path from 'path';
-
+import parse from './parser';
 
 const genDiff = (pathToBefore, pathToAfter) => {
   const absolutePathToBefore = path.resolve(process.cwd(), pathToBefore);
   const absolutePathToAfter = path.resolve(process.cwd(), pathToAfter);
 
+  const typeBefore = path.extname(pathToBefore);
+  const typeAfter = path.extname(pathToAfter);
+
   const contentBefore = fs.readFileSync(absolutePathToBefore, 'utf-8');
   const contentAfter = fs.readFileSync(absolutePathToAfter, 'utf-8');
 
-  const objectBefore = JSON.parse(contentBefore);
-  const objectAfter = JSON.parse(contentAfter);
+  const objectBefore = parse(contentBefore, typeBefore);
+  const objectAfter = parse(contentAfter, typeAfter);
   const mergedObject = { ...objectBefore, ...objectAfter };
 
   const result = Object.keys(mergedObject).reduce((acc, key) => {
