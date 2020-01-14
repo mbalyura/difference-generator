@@ -3,7 +3,7 @@ import genDiff from '../src';
 
 const result = fs.readFileSync('__fixtures__/result.txt', 'utf-8');
 
-test('two plain json', () => {
+test('two depth json', () => {
   const pathToBefore = '__fixtures__/before.json';
   const pathToAfter = '__fixtures__/after.json';
   expect(genDiff(pathToBefore, pathToAfter)).toEqual(result);
