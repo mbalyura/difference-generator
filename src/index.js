@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parser';
 import getAst from './astBuilder';
-import render from './renderer';
+import render from './formatters';
 
 const readFiles = (pathToBefore, pathToAfter) => {
   const absolutePathToBefore = path.resolve(process.cwd(), pathToBefore);
@@ -21,10 +21,11 @@ const readFiles = (pathToBefore, pathToAfter) => {
   return [objectBefore, objectAfter];
 };
 
-const genDiff = (pathToBefore, pathToAfter) => {
+const genDiff = (pathToBefore, pathToAfter, format) => {
   const [objectBefore, objectAfter] = readFiles(pathToBefore, pathToAfter);
   const ast = getAst(objectBefore, objectAfter);
-  return render(ast);
+
+  return render(ast, format);
 };
 
 export default genDiff;

@@ -3,7 +3,7 @@ import _ from 'lodash';
 const getAst = (objectBefore, objectAfter) => {
   const mergedObject = { ...objectBefore, ...objectAfter };
 
-  return Object.keys(mergedObject).sort().reduce((acc, key) => {
+  return _.keys(mergedObject).sort().reduce((acc, key) => {
     const beforeValue = objectBefore[key];
     const afterValue = objectAfter[key];
 

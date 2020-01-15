@@ -5,7 +5,7 @@ const render = (ast) => {
 
   const stringify = (value, depth) => {
     if (_.isObject(value)) {
-      const lines = Object.keys(value).sort().map((key) => `${getSpaces(depth + 6)}${key}: ${value[key]}`);
+      const lines = _.keys(value).sort().map((key) => `${getSpaces(depth + 6)}${key}: ${value[key]}`);
       return `{\n${lines.join('\n')}\n${getSpaces(depth + 2)}}`;
     }
     return value;
@@ -27,7 +27,7 @@ const render = (ast) => {
       deleted: `${getSpaces(depth)}- ${key}: ${stringify(value, depth)}`,
       unchanged: `${getSpaces(depth)}  ${key}: ${stringify(value, depth)}`,
       changed: [`${getSpaces(depth)}- ${key}: ${stringify(beforeValue, depth)}`,
-        `${getSpaces(depth)}+ ${key}: ${stringify(afterValue, depth)}`].join('\n'),
+        `${getSpaces(depth)}+ ${key}: ${stringify(afterValue, depth)}`],
     };
     return linesByType[type];
   });
