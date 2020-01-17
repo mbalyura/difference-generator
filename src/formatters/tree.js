@@ -13,22 +13,23 @@ const render = (ast) => {
 
   const getLines = (nodes, depth = 2) => nodes.map((node) => {
     const {
-      key, value, beforeValue, afterValue, type, children,
+      key, oldValue, newValue, type, children,
     } = node;
 
-    if (children) {
+    const linesByType = {
+      added: `${getSpaces(depth)}+ ${key}: ${stringify(newValue, depth)}`,
+      deleted: `${getSpaces(depth)}- ${key}: ${stringify(oldValue, depth)}`,
+      unchanged: `${getSpaces(depth)}  ${key}: ${stringify(newValue, depth)}`,
+      changed: [`${getSpaces(depth)}- ${key}: ${stringify(oldValue, depth)}`,
+        `${getSpaces(depth)}+ ${key}: ${stringify(newValue, depth)}`],
+    };
+
+    if (node.type === 'nested') {
       return [`${getSpaces(depth + 2)}${key}: {`,
         _.flatten(getLines(children, depth + 4)).join('\n'),
         `${getSpaces(depth + 2)}}`];
     }
 
-    const linesByType = {
-      added: `${getSpaces(depth)}+ ${key}: ${stringify(value, depth)}`,
-      deleted: `${getSpaces(depth)}- ${key}: ${stringify(value, depth)}`,
-      unchanged: `${getSpaces(depth)}  ${key}: ${stringify(value, depth)}`,
-      changed: [`${getSpaces(depth)}- ${key}: ${stringify(beforeValue, depth)}`,
-        `${getSpaces(depth)}+ ${key}: ${stringify(afterValue, depth)}`],
-    };
     return linesByType[type];
   });
 
