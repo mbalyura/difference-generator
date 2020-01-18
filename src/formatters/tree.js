@@ -5,7 +5,7 @@ const getSpaces = (depth) => ' '.repeat(depth);
 const stringify = (value, depth) => {
   if (_.isObject(value)) {
     const lines = _.keys(value).sort()
-      .map((key) => `${getSpaces(depth + 6)}${key}: ${stringify(value[key], depth + 2)}`);
+      .map((key) => `${getSpaces(depth + 6)}${key}: ${stringify(value[key], depth + 4)}`);
     return `{\n${lines.join('\n')}\n${getSpaces(depth + 2)}}`;
   }
   return value;
