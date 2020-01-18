@@ -16,7 +16,9 @@
     "url": "git+https://github.com/mbalyura/frontend-project-lvl2.git"
   },
   "keywords": [
-    "gendiff"
+    "gendiff",
+    "config",
+    "compare"
   ],
   "author": "mbalyura",
   "license": "ISC",
