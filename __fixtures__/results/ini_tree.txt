@@ -1,0 +1,22 @@
+{
+    Section1: {
+        host: hexlet.io
+        part2: {
+            follow: false
+          - proxy: true
+        }
+      + search: google.com
+    }
+    Section2: {
+        part3: {
+          - baz: no
+          + baz: yes
+            foo: bar
+          - subpart: hey
+          + subpart: {
+                key: value
+                key2: value2
+            }
+        }
+    }
+}

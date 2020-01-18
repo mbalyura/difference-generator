@@ -1,4 +1,14 @@
-host: hexlet.io
-timeout: 50
-proxy: 123.234.53.22
-follow: false
+group1: 
+  baz: bas,
+  foo: bar,
+  nest: 
+    key: value
+hosts: 
+  main: hexlet.io,
+  new: google.com
+language: node_js
+node_js:
+  node: true
+  foo: 
+    bar: baz
+    bool: false

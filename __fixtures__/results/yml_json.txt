@@ -1,0 +1,82 @@
+[
+  {
+    "key": "group1",
+    "type": "nested",
+    "children": [
+      {
+        "key": "baz",
+        "oldValue": "bas,",
+        "newValue": {
+          "key": "value",
+          "key2": "value2"
+        },
+        "type": "changed"
+      },
+      {
+        "key": "foo",
+        "oldValue": "bar,",
+        "type": "deleted"
+      },
+      {
+        "key": "nest",
+        "type": "nested",
+        "children": [
+          {
+            "key": "key",
+            "oldValue": "value",
+            "newValue": "value2",
+            "type": "changed"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "hosts",
+    "type": "nested",
+    "children": [
+      {
+        "key": "main",
+        "newValue": "hexlet.io,",
+        "type": "unchanged"
+      },
+      {
+        "key": "new",
+        "oldValue": "google.com",
+        "newValue": "ya.ru",
+        "type": "changed"
+      }
+    ]
+  },
+  {
+    "key": "language",
+    "oldValue": "node_js",
+    "newValue": "java",
+    "type": "changed"
+  },
+  {
+    "key": "node_js",
+    "type": "nested",
+    "children": [
+      {
+        "key": "foo",
+        "oldValue": {
+          "bar": "baz",
+          "bool": false
+        },
+        "newValue": "bar",
+        "type": "changed"
+      },
+      {
+        "key": "node",
+        "newValue": true,
+        "type": "unchanged"
+      }
+    ]
+  },
+  {
+    "key": "timeout",
+    "newValue": 20,
+    "type": "added"
+  }
+]

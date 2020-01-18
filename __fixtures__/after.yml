@@ -1,3 +1,14 @@
+group1: 
+  baz:
+    key: value
+    key2: value2
+  nest: 
+    key: value2
+hosts: 
+  main: hexlet.io,
+  new: ya.ru
+language: java
+node_js:
+  node: true
+  foo: bar
 timeout: 20
-verbose: true
-host: hexlet.io

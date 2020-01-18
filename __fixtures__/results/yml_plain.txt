@@ -1,0 +1,7 @@
+Property 'group1.baz' was changed. From 'bas,' to '[complex value]'
+Property 'group1.foo' was deleted
+Property 'group1.nest.key' was changed. From 'value' to 'value2'
+Property 'hosts.new' was changed. From 'google.com' to 'ya.ru'
+Property 'language' was changed. From 'node_js' to 'java'
+Property 'node_js.foo' was changed. From '[complex value]' to 'bar'
+Property 'timeout' was added with value: 20

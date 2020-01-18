@@ -1,0 +1,66 @@
+[
+  {
+    "key": "Section1",
+    "type": "nested",
+    "children": [
+      {
+        "key": "host",
+        "newValue": "hexlet.io",
+        "type": "unchanged"
+      },
+      {
+        "key": "part2",
+        "type": "nested",
+        "children": [
+          {
+            "key": "follow",
+            "newValue": false,
+            "type": "unchanged"
+          },
+          {
+            "key": "proxy",
+            "oldValue": true,
+            "type": "deleted"
+          }
+        ]
+      },
+      {
+        "key": "search",
+        "newValue": "google.com",
+        "type": "added"
+      }
+    ]
+  },
+  {
+    "key": "Section2",
+    "type": "nested",
+    "children": [
+      {
+        "key": "part3",
+        "type": "nested",
+        "children": [
+          {
+            "key": "baz",
+            "oldValue": "no",
+            "newValue": "yes",
+            "type": "changed"
+          },
+          {
+            "key": "foo",
+            "newValue": "bar",
+            "type": "unchanged"
+          },
+          {
+            "key": "subpart",
+            "oldValue": "hey",
+            "newValue": {
+              "key": "value",
+              "key2": "value2"
+            },
+            "type": "changed"
+          }
+        ]
+      }
+    ]
+  }
+]

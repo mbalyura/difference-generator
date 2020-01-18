@@ -1,0 +1,4 @@
+Property 'Section1.part2.proxy' was deleted
+Property 'Section1.search' was added with value: google.com
+Property 'Section2.part3.baz' was changed. From 'no' to 'yes'
+Property 'Section2.part3.subpart' was changed. From 'hey' to '[complex value]'

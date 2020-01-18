@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-const render = (ast) => {
-  const getCurrentValue = (value) => (_.isObject(value) ? '[complex value]' : value);
+const stringify = (value) => (_.isObject(value) ? '[complex value]' : value);
 
+const render = (ast) => {
   const getLines = (nodes, path) => nodes
     .filter((node) => node.type !== 'unchanged')
     .map((node) => {
@@ -13,9 +13,9 @@ const render = (ast) => {
       const currentPath = path ? `${path}.${key}` : `${key}`;
 
       const linesByType = {
-        added: `Property '${currentPath}' was ${type} with value: ${getCurrentValue(newValue)}`,
+        added: `Property '${currentPath}' was ${type} with value: ${stringify(newValue)}`,
         deleted: `Property '${currentPath}' was ${type}`,
-        changed: `Property '${currentPath}' was ${type}. From '${getCurrentValue(oldValue)}' to '${getCurrentValue(newValue)}'`,
+        changed: `Property '${currentPath}' was ${type}. From '${stringify(oldValue)}' to '${stringify(newValue)}'`,
       };
 
       if (node.type === 'nested') {

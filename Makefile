@@ -1,3 +1,5 @@
+install:
+	npm install
 start:
 	npx babel-node -- src/bin/gendiff.js __fixtures__/before.json __fixtures__/after.json
 	npx babel-node -- src/bin/gendiff.js __fixtures__/before.yml __fixtures__/after.yml
