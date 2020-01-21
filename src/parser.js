@@ -3,9 +3,9 @@ import ini from 'ini';
 
 
 const parserByDataType = {
-  '.json': JSON.parse,
-  '.yml': yaml.safeLoad,
-  '.ini': ini.parse,
+  json: JSON.parse,
+  yml: yaml.safeLoad,
+  ini: ini.parse,
 };
 
 const parse = (data, type) => {

@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
 const getAst = (objectBefore, objectAfter) => {
-  const uniqKeys = _.keys({ ...objectBefore, ...objectAfter });
+  const keys = _.keys({ ...objectBefore, ...objectAfter });
 
-  return uniqKeys.sort().map((key) => {
+  return keys.sort().map((key) => {
     const oldValue = objectBefore[key];
     const newValue = objectAfter[key];
 

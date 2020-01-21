@@ -13,11 +13,13 @@ const table = [
   ['ini', 'json'],
 ];
 
+const getFixturePath = (filename, extension) => `${__dirname}/../__fixtures__/${filename}.${extension}`;
+
 test.each(table)(
-  'compare 2 files(%s, %s)', (ext, format) => {
-    const before = `${__dirname}/../__fixtures__/before.${ext}`;
-    const after = `${__dirname}/../__fixtures__/after.${ext}`;
-    const result = fs.readFileSync(`${__dirname}/../__fixtures__/results/${format}.txt`, 'utf-8');
-    expect(genDiff(before, after, format)).toEqual(result);
+  'compare 2 files(%s, %s)', (extension, format) => {
+    const beforePath = getFixturePath('before', extension);
+    const afterPath = getFixturePath('after', extension);
+    const result = fs.readFileSync(getFixturePath(format, 'txt'), 'utf-8');
+    expect(genDiff(beforePath, afterPath, format)).toEqual(result);
   },
 );

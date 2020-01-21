@@ -10,14 +10,15 @@ const readFile = (filePath) => {
   return data;
 };
 
+const getExtension = (filePath) => path.extname(filePath).substr(1);
+
 const genDiff = (pathToBefore, pathToAfter, format) => {
-  const typeBefore = path.extname(pathToBefore);
-  const typeAfter = path.extname(pathToAfter);
-
   const dataBefore = readFile(pathToBefore);
-  const dataAfter = readFile(pathToAfter);
-
+  const typeBefore = getExtension(pathToBefore);
   const objectBefore = parse(dataBefore, typeBefore);
+
+  const dataAfter = readFile(pathToAfter);
+  const typeAfter = getExtension(pathToAfter);
   const objectAfter = parse(dataAfter, typeAfter);
 
   const ast = getAst(objectBefore, objectAfter);
