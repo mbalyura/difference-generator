@@ -3,9 +3,7 @@ import plain from './plain';
 import json from './json';
 
 const renderByFormat = {
-  tree: (ast) => tree(ast),
-  plain: (ast) => plain(ast),
-  json: (ast) => json(ast),
+  tree, plain, json,
 };
 
 export default (ast, format) => {

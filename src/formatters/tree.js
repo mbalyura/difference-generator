@@ -3,12 +3,12 @@ import _ from 'lodash';
 const getSpaces = (depth) => ' '.repeat(depth);
 
 const stringify = (value, depth) => {
-  if (_.isObject(value)) {
-    const lines = _.keys(value).sort()
-      .map((key) => `${getSpaces(depth + 6)}${key}: ${stringify(value[key], depth + 4)}`);
-    return `{\n${lines.join('\n')}\n${getSpaces(depth + 2)}}`;
-  }
-  return value;
+  if (!_.isObject(value)) return value;
+
+  const lines = _.keys(value).sort()
+    .map((key) => `${getSpaces(depth + 6)}${key}: ${stringify(value[key], depth + 4)}`);
+
+  return `{\n${lines.join('\n')}\n${getSpaces(depth + 2)}}`;
 };
 
 const render = (ast) => {
@@ -18,23 +18,20 @@ const render = (ast) => {
     } = node;
 
     const linesByType = {
-      added: `${getSpaces(depth)}+ ${key}: ${stringify(newValue, depth)}`,
-      deleted: `${getSpaces(depth)}- ${key}: ${stringify(oldValue, depth)}`,
-      unchanged: `${getSpaces(depth)}  ${key}: ${stringify(newValue, depth)}`,
-      changed: [`${getSpaces(depth)}- ${key}: ${stringify(oldValue, depth)}`,
+      added: () => `${getSpaces(depth)}+ ${key}: ${stringify(newValue, depth)}`,
+      deleted: () => `${getSpaces(depth)}- ${key}: ${stringify(oldValue, depth)}`,
+      unchanged: () => `${getSpaces(depth)}  ${key}: ${stringify(newValue, depth)}`,
+      changed: () => [`${getSpaces(depth)}- ${key}: ${stringify(oldValue, depth)}`,
         `${getSpaces(depth)}+ ${key}: ${stringify(newValue, depth)}`],
+      nested: () => [`${getSpaces(depth + 2)}${key}: {`,
+        getLines(children, depth + 4).flat().join('\n'),
+        `${getSpaces(depth + 2)}}`],
     };
 
-    if (node.type === 'nested') {
-      return [`${getSpaces(depth + 2)}${key}: {`,
-        _.flatten(getLines(children, depth + 4)).join('\n'),
-        `${getSpaces(depth + 2)}}`];
-    }
-
-    return linesByType[type];
+    return linesByType[type]();
   });
 
-  const lines = _.flatten(getLines(ast)).join('\n');
+  const lines = getLines(ast).flat().join('\n');
   return `{\n${lines}\n}`;
 };
 

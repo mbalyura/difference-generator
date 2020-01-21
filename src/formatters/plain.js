@@ -13,19 +13,16 @@ const render = (ast) => {
       const currentPath = path ? `${path}.${key}` : `${key}`;
 
       const linesByType = {
-        added: `Property '${currentPath}' was ${type} with value: ${stringify(newValue)}`,
-        deleted: `Property '${currentPath}' was ${type}`,
-        changed: `Property '${currentPath}' was ${type}. From '${stringify(oldValue)}' to '${stringify(newValue)}'`,
+        added: () => `Property '${currentPath}' was ${type} with value: ${stringify(newValue)}`,
+        deleted: () => `Property '${currentPath}' was ${type}`,
+        changed: () => `Property '${currentPath}' was ${type}. From '${stringify(oldValue)}' to '${stringify(newValue)}'`,
+        nested: () => getLines(children, currentPath).flat(),
       };
 
-      if (node.type === 'nested') {
-        return getLines(children, currentPath);
-      }
-
-      return linesByType[type];
+      return linesByType[type]();
     });
 
-  const lines = _.flattenDeep(getLines(ast)).join('\n');
+  const lines = getLines(ast).flat().join('\n');
   return lines;
 };
 
