@@ -24,14 +24,14 @@ const render = (ast) => {
       changed: () => [`${getSpaces(depth)}- ${key}: ${stringify(oldValue, depth)}`,
         `${getSpaces(depth)}+ ${key}: ${stringify(newValue, depth)}`],
       nested: () => [`${getSpaces(depth + 2)}${key}: {`,
-        getLines(children, depth + 4).flat().join('\n'),
+        getLines(children, depth + 4),
         `${getSpaces(depth + 2)}}`],
     };
 
     return linesByType[type]();
   });
 
-  const lines = getLines(ast).flat().join('\n');
+  const lines = getLines(ast).flat(Infinity).join('\n');
   return `{\n${lines}\n}`;
 };
 

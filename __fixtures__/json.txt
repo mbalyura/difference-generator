@@ -91,7 +91,11 @@
   {
     "key": "group3",
     "newValue": {
-      "fee": 100500
+      "fee": {
+        "fee": {
+          "fee": 100500
+        }
+      }
     },
     "type": "added"
   }

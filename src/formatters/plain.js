@@ -16,7 +16,7 @@ const render = (ast) => {
         added: () => `Property '${currentPath}' was ${type} with value: ${stringify(newValue)}`,
         deleted: () => `Property '${currentPath}' was ${type}`,
         changed: () => `Property '${currentPath}' was ${type}. From '${stringify(oldValue)}' to '${stringify(newValue)}'`,
-        nested: () => getLines(children, currentPath).flat(),
+        nested: () => getLines(children, currentPath),
       };
 
       return linesByType[type]();
