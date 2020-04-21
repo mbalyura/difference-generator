@@ -1,7 +1,7 @@
 {
-  "name": "frontend-project-lvl2",
+  "name": "difference-generator",
   "version": "0.0.8",
-  "description": "gendiff",
+  "description": "cli utility for comparing configuration files",
   "main": "index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
@@ -26,12 +26,6 @@
     "url": "https://github.com/mbalyura/frontend-project-lvl2/issues"
   },
   "homepage": "https://github.com/mbalyura/frontend-project-lvl2#readme",
-  "jest": {
-    "collectCoverage": true,
-    "coverageReporters": [
-      "lcov"
-    ]
-  },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
